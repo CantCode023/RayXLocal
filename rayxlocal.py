@@ -22,7 +22,7 @@ RayX LOCAL
 3. Check URL
 4. Home
 5. Quit
-6. testing auto update
+6. Update
 7. wat da dog doin
     """)
 
@@ -80,6 +80,8 @@ def IFHANDLER(a):
         CLEAR()
     elif a == "5":
         QUIT()
+    elif a == "6":
+        RELOAD()
     else:
         print("Wrong number! Choose again!")
         time.sleep(2)
