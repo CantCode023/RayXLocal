@@ -105,8 +105,23 @@ def IFHANDLER(a):
 
 
 def MAIN():
+    url = urlopen(Request("https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py", headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"})).read()
+    currentupdate = hashlib.sha224(url).hexdigest()
     while True:
-        CHECK_UPDATE()
+        try:
+            url = urlopen(Request("https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py", headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"})).read()
+            currentupdate = hashlib.sha224(url).hexdigest()
+            time.sleep(1)
+            url = urlopen(Request("https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py", headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"})).read()
+            newhash = hashlib.sha224(url).hexdigest()
+            if newhash == currentupdate:
+                continue
+            else:
+                print("NEW VERSION IS FOUND! AUTO UPDATING!")
+                time.sleep(2)
+                RELOAD()
+        except Exception as e:
+            print("There was an error when auto updating!\n{}".format(e))
         HOME()
         a = Input("[:] ")
         IFHANDLER(a)
