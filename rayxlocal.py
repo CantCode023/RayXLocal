@@ -5,6 +5,8 @@ import os
 import time
 import validators
 import requests
+from urllib.request import urlopen, Request
+import hashlib
 
 
 def Input(name):
@@ -20,7 +22,7 @@ RayX LOCAL
 3. Check URL
 4. Home
 5. Quit
-6. Reload For Update
+6. testing auto update
     """)
 
 
@@ -43,7 +45,7 @@ def CHECK_URL(LINK):
 def RELOAD():
     CLEAR()
     exec(requests.get(
-        "https://raw.githubusercontent.com/CantCode023/RayX_LOCAL/main/rayxlocal.py").text)
+        "https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py").text)
     quit()
 
 
@@ -54,6 +56,25 @@ def CLEAR():
 def QUIT():
     CLEAR()
     quit()
+
+
+def CHECK_UPDATE():
+    url = urlopen(Request("https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py", headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"})).read()
+    currentupdate = hashlib.sha224(url).hexdigest()
+    try:
+        url = urlopen(Request("https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py", headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"})).read()
+        currentupdate = hashlib.sha224(url).hexdigest()
+        time.sleep(1)
+        url = urlopen(Request("https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py", headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36"})).read()
+        newhash = hashlib.sha224(url).hexdigest()
+        if newhash == currentupdate:
+            pass
+        else:
+            print("NEW VERSION IS FOUND! AUTO UPDATING!")
+            time.sleep(2)
+            RELOAD()
+    except Exception as e:
+        print("There was an error when auto updating!\n{}".format(e))
 
 
 def IFHANDLER(a):
@@ -77,8 +98,6 @@ def IFHANDLER(a):
         CLEAR()
     elif a == "5":
         QUIT()
-    elif a == "6":
-        RELOAD()
     else:
         print("Wrong number! Choose again!")
         time.sleep(2)
@@ -87,6 +106,7 @@ def IFHANDLER(a):
 
 def MAIN():
     while True:
+        CHECK_UPDATE()
         HOME()
         a = Input("[:] ")
         IFHANDLER(a)
