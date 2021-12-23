@@ -85,7 +85,7 @@ def IFHANDLER(a):
     else:
         print("Wrong number! Choose again!")
         time.sleep(2)
-        CLEAR()
+        RELOAD()
 
 
 def MAIN():
