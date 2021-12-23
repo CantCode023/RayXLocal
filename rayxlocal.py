@@ -23,6 +23,7 @@ RayX LOCAL
 4. Home
 5. Quit
 6. testing auto update
+7. wat da dog doin
     """)
 
 
